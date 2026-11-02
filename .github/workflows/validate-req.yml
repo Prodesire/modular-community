@@ -34,13 +34,16 @@ jobs:
       - name: Record recipe identity
         run: git rev-parse HEAD:recipes/req/recipe.yaml
       - name: Build and test installed package
+        shell: bash
         run: |
+          mkdir -p output/req-validation
           pixi exec --spec 'rattler-build>=0.30,<0.31' -- \
             rattler-build build --recipe recipes/req \
             --variant-config variants/variants.yaml \
             -c conda-forge -c https://conda.modular.com/max \
             -c https://prefix.dev/modular-community \
             --output-dir output/req-validation --log-style plain 2>&1 | tee build-req.log
+          compgen -G 'output/req-validation/${{ matrix.platform }}/*.conda'
       - name: Upload package and build log
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
