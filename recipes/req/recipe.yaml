@@ -1,7 +1,7 @@
 context:
   version: "0.2.0"
   mojo_version: "==1.1.0"
-  req_commit: "81bb72e4d95bce018680d51da418baa32afd94f1"
+  req_commit: "88617b3c4a69f127a8267be1d008c0c704022c9c"
 
 package:
   name: req
